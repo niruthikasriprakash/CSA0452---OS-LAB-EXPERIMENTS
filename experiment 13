@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    int block[10], process[10], nb, np, i, j;
+
+    printf("Enter number of blocks: ");
+    scanf("%d",&nb);
+
+    printf("Enter block sizes:\n");
+    for(i=0;i<nb;i++)
+        scanf("%d",&block[i]);
+
+    printf("Enter number of processes: ");
+    scanf("%d",&np);
+
+    printf("Enter process sizes:\n");
+    for(i=0;i<np;i++)
+        scanf("%d",&process[i]);
+
+    printf("\nFirst Fit Allocation:\n");
+
+    for(i=0;i<np;i++) {
+        for(j=0;j<nb;j++) {
+            if(block[j] >= process[i]) {
+                printf("Process %d allocated to Block %d\n",i+1,j+1);
+                block[j] -= process[i];
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
