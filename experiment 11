@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <pthread.h>
+
+void* display(void* arg) {
+    int n = *(int*)arg;
+    for(int i=1;i<=n;i++) {
+        printf("Thread Value = %d\n", i);
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t t1;
+    int n;
+
+    printf("Enter limit: ");
+    scanf("%d",&n);
+
+    pthread_create(&t1,NULL,display,&n);
+    pthread_join(t1,NULL);
+
+    return 0;
+}
