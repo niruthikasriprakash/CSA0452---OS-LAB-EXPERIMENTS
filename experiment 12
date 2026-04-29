@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+
+    printf("Enter number of philosophers: ");
+    scanf("%d",&n);
+
+    for(i=1;i<=n;i++) {
+        printf("Philosopher %d is THINKING\n",i);
+        printf("Philosopher %d is HUNGRY\n",i);
+        printf("Philosopher %d is EATING\n",i);
+        printf("Philosopher %d finished eating\n\n",i);
+    }
+
+    return 0;
+}
