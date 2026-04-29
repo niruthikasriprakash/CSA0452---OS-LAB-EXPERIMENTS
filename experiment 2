@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main()
+{
+    int source, dest, n;
+    char buffer[100];
+    char sfile[50], dfile[50];
+
+    printf("Enter source file: ");
+    scanf("%s", sfile);
+
+    printf("Enter destination file: ");
+    scanf("%s", dfile);
+
+    source = open(sfile, O_RDONLY);
+    dest = open(dfile, O_CREAT | O_WRONLY, 0777);
+
+    while((n = read(source, buffer, 100)) > 0)
+    {
+        write(dest, buffer, n);
+    }
+
+    close(source);
+    close(dest);
+
+    printf("File copied successfully\n");
+
+    return 0;
+}
