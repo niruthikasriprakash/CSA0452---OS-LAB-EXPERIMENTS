@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int mutex = 1;
+int wrt = 1;
+int readcount = 0;
+
+int wait(int s) {
+    return --s;
+}
+
+int signal(int s) {
+    return ++s;
+}
+
+void reader(int n) {
+    mutex = wait(mutex);
+    readcount++;
+
+    if (readcount == 1)
+        wrt = wait(wrt);
+
+    mutex = signal(mutex);
+
+    printf("Reader %d is reading\n", n);
+
+    mutex = wait(mutex);
+    readcount--;
+
+    if (readcount == 0)
+        wrt = signal(wrt);
+
+    mutex = signal(mutex);
+}
+
+void writer(int n) {
+    wrt = wait(wrt);
+
+    printf("Writer %d is writing\n", n);
+
+    wrt = signal(wrt);
+}
+
+int main() {
+    reader(1);
+    reader(2);
+    writer(1);
+    reader(3);
+
+    return 0;
+}
